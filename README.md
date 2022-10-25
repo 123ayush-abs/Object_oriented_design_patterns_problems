@@ -20,3 +20,6 @@ Booked Seat:- A1, A4'''
 LOgic:----
 avail seat ko set m convert kra then requested seat set k unuin kra agr result set k lenght == avail_seat k equal ho to availablle hai
 remove kren k=>> simple iterate krke avail_seat se hta diya req_seat ko aur usko update kr diya using list comprehension
+
+
+![WhatsApp Image 2022-10-25 at 20 44 19](https://user-images.githubusercontent.com/74004844/197813326-4b5bea71-deea-4696-9250-d75665a3d77a.jpeg)
