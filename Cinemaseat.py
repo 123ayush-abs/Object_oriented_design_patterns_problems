@@ -1,32 +1,42 @@
 class Movie:
     show1seat=["A1","A2","A3","A4","A5","A6","A9"]
     show2seat=["A1","A2","A4","A5","A6","B1","B3","B4","B5","B6","B7"]
-    
-    @staticmethod   #utility method to perform only calculation
-    def Iseatthere(booked_seat,avail_seat):  #to check if seat is available
+    @staticmethod
+    def Iseatthere(booked_seat,avail_seat):
         avail_set=set(avail_seat)
         booked_seat=set(booked_seat)
         res_set=avail_set.union(booked_seat)
         if(len(res_set)==len(avail_seat)):
             return 1
         else:
-            return 0  
+            return 0
+    
     
 class Show1:
     def __init__(self,bookedseat):
         self.bookedseat=bookedseat
     def Reamin_Seat(self):
-        for seat in self.bookedseat:
-           Movie.show1seat.remove(seat)
+        Movie.show1seat=[seat for seat in Movie.show1seat if seat not in self.bookedseat]
+        # for seat in self.bookedseat:
+        #    Movie.show1seat.remove(seat)
         
     
 class Show2:
     def __init__(self,bookedseat):
         self.bookedseat=bookedseat
     def Reamin_Seat(self):
-        for seat in self.bookedseat:
-            Movie.show2seat.remove(seat)
+        Movie.show2seat=[seat for seat in Movie.show2seat if seat not in self.bookedseat]
+        # for seat in self.bookedseat:
+        #     Movie.show2seat.remove(seat)
 
+# def Iseatthere(booked_seat,avail_seat):
+#     avail_set=set(avail_seat)
+#     booked_seat=set(booked_seat)
+#     res_set=avail_set.union(booked_seat)
+#     if(len(res_set)==len(avail_seat)):
+#         return 1
+#     else:
+#         return 0
 print("Menue:--")
 print("Press 0 to quit")
 while(1):
@@ -45,3 +55,24 @@ while(1):
         print(Movie.show2seat)
     elif(show_num==0):
         break
+    
+    
+    
+    
+# class B(Movie):
+#     def update(self):
+#         Movie.show1seat.append("A100")
+# b=B()
+# b.update()
+# print(Movie.show1seat)        
+        
+                      
+           
+
+          
+                      
+                      
+           
+
+                                 
+                      
