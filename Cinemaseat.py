@@ -1,8 +1,8 @@
 class Movie:
     show1seat=["A1","A2","A3","A4","A5","A6","A9"]
     show2seat=["A1","A2","A4","A5","A6","B1","B3","B4","B5","B6","B7"]
-    @staticmethod
-    def Iseatthere(booked_seat,avail_seat):
+    @staticmethod       #utility method to check if seat is avail or not accsed by class name 
+    def Iseatthere(booked_seat,avail_seat):  #independent of the object and class properties only con=cerned with calc
         avail_set=set(avail_seat)
         booked_seat=set(booked_seat)
         res_set=avail_set.union(booked_seat)
@@ -29,14 +29,6 @@ class Show2:
         # for seat in self.bookedseat:
         #     Movie.show2seat.remove(seat)
 
-# def Iseatthere(booked_seat,avail_seat):
-#     avail_set=set(avail_seat)
-#     booked_seat=set(booked_seat)
-#     res_set=avail_set.union(booked_seat)
-#     if(len(res_set)==len(avail_seat)):
-#         return 1
-#     else:
-#         return 0
 print("Menue:--")
 print("Press 0 to quit")
 while(1):
@@ -57,20 +49,7 @@ while(1):
         break
     
     
-    
-    
-# class B(Movie):
-#     def update(self):
-#         Movie.show1seat.append("A100")
-# b=B()
-# b.update()
-# print(Movie.show1seat)        
-        
-                      
-           
-
-          
-                      
+ 
                       
            
 
