@@ -1,0 +1,15 @@
+# A local pizza store wants you to develop an application where customers can order a pizza of 
+# their choice. The customer will be given a choice to customize their pizza based on below menu:
+
+APPROACH:-----------
+WE HAVE DONE IT USING INNER CLASS CONCEPT
+AS WE MAKE CLASS PIZZA HAVING INFO ABOUT ALL THE PIZZA BASE TYPE AND IT ALSO CALCULATES THE TOTAL BILL
+WITH DISCOUNT AND WITH NO DISCOUNT
+
+NEXT INNER CLASS IS THERE CALLED TOPPINGS
+HAVING INFO ABOUT ALL THE PIZZA TOPPINGS AND IT ALSO CALCULATES THE TOTAL BILL of toppings only
+
+NEXT INNER CLASSES ARE DRINKS AND DESERT
+HAVING INFO ABOUT ALL THE DRINKS AND DESERTSS AND IT ALSO CALCULATES THE TOTAL BILL of drinks and desrt only
+
+took user input and called the class
