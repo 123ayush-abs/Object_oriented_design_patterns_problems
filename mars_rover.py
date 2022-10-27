@@ -12,21 +12,32 @@ left_rotate_dic={
     'E':'N'
 }
 class Pleatue:
-    def __init__(self,px=0,py=0):
-        self.px=px
-        self.py=py 
-    def issafeState(self,rx,ry):
-        if(rx<=self.px and ry<=self.py):
-            return "Flase"
+    @staticmethod
+    def issafeState(px,py,rx,ry):
+        if(rx<=px and ry<=py):
+            return 1
         else:
-            return "True"
+            return 0
 class Mars_Rover(Pleatue):
-    def __init__(self,rx,ry,head,dir_list):
+    def __init__(self,rx,ry,head,dir_list,px,py):
         self.initial_x=rx
         self.initial_y=ry
         self.dir_list=dir_list
         self.head=head
-        Pleatue.__init__(self)
+        self.px=px 
+        self.py=py
+    def left_move(self,x):
+        x=x-1
+        return x
+    def right_move(self,x):
+        x=x+1
+        return x 
+    def Up_move(self,y):
+        y+=1
+        return y 
+    def Down_move(self,y):
+        y-=1
+        return y
     def Move_Commands(self):
         for direction in self.dir_list: 
             if(direction=='L'):
@@ -42,43 +53,40 @@ class Mars_Rover(Pleatue):
             elif(direction=='M'):
                 # print(self.head)
                 if(self.head=='W' ):
-                    self.initial_x-=1
                     self.initial_y+=0
-                    res=self.issafeState(self.initial_x,self.initial_y)
-                    if(res=='False'):
-                        pass 
-                    else:
-                        return "OUT OF MARS"
+                    self.initial_x=self.left_move(self.initial_x)
+                    # self.initial_x-=1
+                    # self.initial_y+=0
+                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
+                    if(ress==0):
+                        return "OUY OF MARS"
                 elif(self.head=='E' ):
-                    self.initial_x+=1
-                    self.initial_y+=0
-                    res=self.issafeState(self.initial_x,self.initial_y)
-                    if(res=='False'):
-                        pass 
-                    else:
-                        return "OUT OF MARS"
+                    self.initial_y+=0 
+                    self.initial_x=self.right_move(self.initial_x)
+                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
+                    if(ress==0):
+                        return "OUY OF MARS"
                 elif(self.head=='N' ):
-                    self.initial_y+=1
-                    self.initial_x+=0
-                    res=self.issafeState(self.initial_x,self.initial_y)
-                    if(res=='False'):
-                        pass 
-                    else:
-                        return "OUT OF MARS"
+                    self.initial_x+=0 
+                    self.initial_y=self.Up_move(self.initial_y)
+                    # self.initial_y+=1
+                    # self.initial_x+=0
+                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
+                    if(ress==0):
+                        return "OUY OF MARS"
                 elif(self.head=='S' ):
-                    self.initial_y-=1
-                    self.initial_x+=0
-                    res=self.issafeState(self.initial_x,self.initial_y)
-                    if(res=='False'):
-                        pass 
-                    else:
-                        return "OUT OF MARS" 
+                    self.initial_x+=0 
+                    self.initial_y=self.Down_move(self.initial_y)
+                    # self.initial_y-=1
+                    # self.initial_x+=0
+                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
+                    if(ress==0):
+                        return "OUY OF MARS"
             else:
                 return "Invalid Commands"
         return[self.initial_x,self.initial_y,self.head]
 def main_func():    
     p_x,p_y=map(int,input("Enter Pleatue Coordinates:").split())
-    pleatue=Pleatue(p_x,p_y)
     print("1:-Enter Total Rovers:")
     rover_num=int(input())
     for rov_num in range(rover_num):
@@ -87,7 +95,7 @@ def main_func():
         r_y=int(r_y)
         head=str(head)
         Commands=input("Enter Sequence of commands:")
-        rover=Mars_Rover(r_x,r_y,head,Commands)
+        rover=Mars_Rover(r_x,r_y,head,Commands,p_x,p_y)
         result=rover.Move_Commands()
         print(result)
 main_func()
