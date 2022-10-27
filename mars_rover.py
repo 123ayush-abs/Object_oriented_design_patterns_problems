@@ -11,6 +11,9 @@ left_rotate_dic={
     'S':'E',
     'E':'N'
 }
+def Factory_method(r_x,r_y,head,Commands,p_x,p_y):
+    return Mars_Rover(r_x,r_y,head,Commands,p_x,p_y)
+
 class Pleatue:
     @staticmethod
     def issafeState(px,py,rx,ry):
@@ -95,7 +98,7 @@ def main_func():
         r_y=int(r_y)
         head=str(head)
         Commands=input("Enter Sequence of commands:")
-        rover=Mars_Rover(r_x,r_y,head,Commands,p_x,p_y)
+        rover=Factory_method(r_x,r_y,head,Commands,p_x,p_y)
         result=rover.Move_Commands()
         print(result)
 main_func()
