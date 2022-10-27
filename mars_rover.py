@@ -11,24 +11,26 @@ left_rotate_dic={
     'S':'E',
     'E':'N'
 }
-def Factory_method(r_x,r_y,head,Commands,p_x,p_y):
-    return Mars_Rover(r_x,r_y,head,Commands,p_x,p_y)
+def Factory_method(r_x,r_y,head,Commands,pleatue):
+    return Mars_Rover(r_x,r_y,head,Commands,pleatue)
 
 class Pleatue:
-    @staticmethod
-    def issafeState(px,py,rx,ry):
-        if(rx<=px and ry<=py):
-            return 1
-        else:
-            return 0
-class Mars_Rover(Pleatue):
-    def __init__(self,rx,ry,head,dir_list,px,py):
+    min_x=0
+    min_y=0 
+    def __init__(self,px,py,mx=0,my=0):
+        self.px=px 
+        self.py=py 
+        self.min_x=mx 
+        self.min_y=my
+    def issafeState(self,rx,ry):
+        return self.min_x<=rx<=self.px and self.min_y<=ry<=self.py 
+class Mars_Rover:
+    def __init__(self,rx,ry,head,dir_list,plt_obj):
         self.initial_x=rx
         self.initial_y=ry
         self.dir_list=dir_list
         self.head=head
-        self.px=px 
-        self.py=py
+        self.plt_obj=plt_obj
     def left_move(self,x):
         x=x-1
         return x
@@ -60,47 +62,45 @@ class Mars_Rover(Pleatue):
                     self.initial_x=self.left_move(self.initial_x)
                     # self.initial_x-=1
                     # self.initial_y+=0
-                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
-                    if(ress==0):
-                        return "OUY OF MARS"
+                    ress=self.plt_obj.issafeState(self.initial_x,self.initial_y)
+                    if(ress==False):
+                        return "OUT OF MARS"
                 elif(self.head=='E' ):
                     self.initial_y+=0 
                     self.initial_x=self.right_move(self.initial_x)
-                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
-                    if(ress==0):
+                    ress= self.plt_obj.issafeState(self.initial_x,self.initial_y)
+                    if(ress==False):
                         return "OUY OF MARS"
                 elif(self.head=='N' ):
                     self.initial_x+=0 
                     self.initial_y=self.Up_move(self.initial_y)
                     # self.initial_y+=1
                     # self.initial_x+=0
-                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
-                    if(ress==0):
+                    ress=self.plt_obj.issafeState(self.initial_x,self.initial_y)
+                    if(ress==False):
                         return "OUY OF MARS"
                 elif(self.head=='S' ):
                     self.initial_x+=0 
                     self.initial_y=self.Down_move(self.initial_y)
                     # self.initial_y-=1
                     # self.initial_x+=0
-                    ress=Pleatue.issafeState(self.px,self.py,self.initial_x,self.initial_y)
-                    if(ress==0):
+                    ress=self.plt_obj.issafeState(self.initial_x,self.initial_y)
+                    if(ress==False):
                         return "OUY OF MARS"
             else:
                 return "Invalid Commands"
         return[self.initial_x,self.initial_y,self.head]
 def main_func():    
     p_x,p_y=map(int,input("Enter Pleatue Coordinates:").split())
-    print("1:-Enter Total Rovers:")
-    rover_num=int(input())
-    for rov_num in range(rover_num):
-        r_x,r_y,head=map(str,input("Enter Rover Info:").split())
-        r_x=int(r_x)
-        r_y=int(r_y)
-        head=str(head)
-        Commands=input("Enter Sequence of commands:")
-        rover=Factory_method(r_x,r_y,head,Commands,p_x,p_y)
-        result=rover.Move_Commands()
-        print(result)
+    r_x,r_y,head=map(str,input("Enter Rover Info:").split())
+    r_x=int(r_x)
+    r_y=int(r_y)
+    head=str(head)
+    Commands=input("Enter Sequence of commands:")
+    pleatue=Pleatue(p_x, p_y)
+    rover=Factory_method(r_x,r_y,head,Commands,pleatue)
+    result=rover.Move_Commands()
+    print(result)
 main_func()
             
                     
