@@ -4,7 +4,6 @@ class Caluclate_Fair(ABC):
     @abstractmethod
     def Calculate_Fair_taxi(self,cust_distance):
         pass 
-    
 class Driver_Suggestion:
     def Suggest_Driver_withoutdest(self,car_dict,cab_name,cab_dest=None):
         if(cab_name not in car_dict):
@@ -37,7 +36,7 @@ class Driver_Suggestion:
                 if(float(driver[1])<4):
                     continue 
                 else:
-                    if(driver[2]<=min_dist and float(driver[1])>=4 and cab_dest in driver[3]):
+                    if(driver[2]<=min_dist and cab_dest in driver[3][0]):
                         min_dist=driver[2]
                         driver_name=driver[0]
                     else:
@@ -45,11 +44,7 @@ class Driver_Suggestion:
      
         if(len(driver_name)==0 ):
             return "Could not find driver"
-        return driver_name
-        
-        
-        
-        
+        return driver_name   
 class Register_Cab(Caluclate_Fair,Driver_Suggestion):
     cab_dict=defaultdict(list)
     def __init__(self,driver_name,cab_model,rating,dfc,dest=None):  
@@ -69,27 +64,28 @@ class Register_Cab(Caluclate_Fair,Driver_Suggestion):
         return driver_name
 
 #main function
-#test case 1
-# taxi=Register_Cab('A', 'Sedan', 4 ,500)
+
+# taxi=Register_Cab('A', 'HatchBack', 4 ,500)
 # taxi=Register_Cab('B' ,'HatchBack' ,4.3, 1000)
 # taxi=Register_Cab('C','5SEATER',4.8,200)
 # taxi=Register_Cab('D','Sedan',4.1,700)
 # taxi=Register_Cab('E','HatchBack',4.8,430)
-# fair=taxi.Calculate_Fair_taxi(43)
-# driver_status=taxi.get_driver_by_name('Sedan')
+# fair=taxi.Calculate_Fair_taxi(20.5)
+# driver_status=taxi.get_driver_by_name('HatchBack')
 # print(fair)
 # print(driver_status)
 
 #test case 2;---
-taxi=Register_Cab('A', 'Sedan', 4 ,500,["Delhi","china"])
-taxi=Register_Cab('B' ,'HatchBack' ,4.3, 1000,"Mumbai")
-taxi=Register_Cab('C','5SEATER',4.8,200,"Delhi")
-taxi=Register_Cab('D','Sedan',4.1,700,"Goa")
-taxi=Register_Cab('E','HatchBack',4.8,430,'china')
-fair=taxi.Calculate_Fair_taxi(43)
-driver_status=taxi.get_driver_by_name('Sedan',"china")
+taxi=Register_Cab('A', '5SEATER', 4 ,500,["Gurgaon", "Noida", "Delhi"])
+taxi=Register_Cab('B' ,'HatchBack' ,4.3, 1000,["Gurgaon"])
+taxi=Register_Cab('C','5SEATER',4.8,200,["Noida"])
+taxi=Register_Cab('D','Sedan',4.1,700,["Noida"])
+taxi=Register_Cab('E','5SEATER',4.7,430,["Delhi"])
+fair=taxi.Calculate_Fair_taxi(60)
+driver_status=taxi.get_driver_by_name('5SEATER',"Gurgaon")
 print(fair)
 print(driver_status)
+# print(Register_Cab.cab_dict)
 
 # # test case 3
 # taxi=Register_Cab('A', 'Sedan', 4 ,500)
