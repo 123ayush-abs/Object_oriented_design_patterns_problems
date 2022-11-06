@@ -37,29 +37,42 @@
 #restrict data accses here
 class OTT_Palt_LIST:
     def __init__(self):
-        self._Netflix={
+        self.__Netflix={
         "Units":10,
         "Price_Unit":10}
-        self._Amazon_prime={
+        self.__Amazon_prime={
         "Units":5,
         "Price_Unit":2}
-        self._Hotstar={
+        self.__Hotstar={
         "Units":5,
         "Price_Unit":1}
+    def get_net_unit(self):
+        return self.__Netflix['Units']
+    def get_net_price(self):
+        return self.__Netflix['Price_Unit']
+    def get_amazon_unit(self):
+            return self.__Amazon_prime['Units']
+    def get_amazon_price(self):
+        return self.__Amazon_prime['Price_Unit']
+    def get_hot_unit(self):
+            return self.__Hotstar['Units']
+    def get_hot_price(self):
+        return self.__Hotstar['Price_Unit']
+
 
 
 class Check_hours_validity(OTT_Palt_LIST):
     def __init__(self):
          OTT_Palt_LIST.__init__(self)
     def check_allowed_multiples(self,view_hours=None,ott_plat=None):
-        if(ott_plat=="netflix" and view_hours%self._Netflix['Units']!=0):
-            sres=ott_plat+" requres hours multiples of "+str(self._Netflix['Units'])
+        if(ott_plat=="netflix" and view_hours%self.get_net_unit()!=0):
+            sres=ott_plat+" requres hours multiples of "+str(self.get_net_unit())
             return sres
-        elif(ott_plat=="amazon" and view_hours%self._Amazon_prime['Units']!=0):
-            sres=ott_plat+" requres hours multiples of "+str(self._Amazon_prime['Units'])
+        elif(ott_plat=="amazon" and view_hours%self.get_amazon_unit()!=0):
+            sres=ott_plat+" requres hours multiples of "+str(self.get_amazon_unit())
             return sres
-        elif(ott_plat=="hotstar" and view_hours%self._Hotstar['Units']!=0):
-            sres=ott_plat+" requres hours multiples of "+str(self._Hotstar['Units'])
+        elif(ott_plat=="hotstar" and view_hours%self.get_hot_unit()!=0):
+            sres=ott_plat+" requres hours multiples of "+str(self.get_hot_price())
             return sres
         else:
             return "true"
@@ -74,24 +87,24 @@ class Caluclate_plan(Check_hours_validity,OTT_Palt_LIST):
             if(i=='netflix'):
                 sres=self.check_allowed_multiples(self.input_dict[i],"netflix")
                 if(sres=="true"):
-                    unit_net=self._Netflix['Units']
-                    price_net=self._Netflix['Price_Unit']
+                    unit_net=self.get_net_unit()
+                    price_net=self.get_net_price()
                     self.amount+=(self.input_dict[i]// unit_net)* price_net
                 else:
                     return sres
             elif(i=='amazon'):
                 sres=self.check_allowed_multiples(self.input_dict[i],"amazon")
                 if(sres=="true"):
-                    unit_amazon=self._Amazon_prime['Units']
-                    price_amzon=self._Amazon_prime['Price_Unit']
+                    unit_amazon=self.get_amazon_unit()
+                    price_amzon=self.get_amazon_price()
                     self.amount+=(self.input_dict[i]// unit_amazon)* price_amzon
                 else:
                     return sres
             elif(i=='hotstar'):
                 sres= self.check_allowed_multiples(self.input_dict[i],"hotstar")
                 if(sres=='true'):
-                    unit_hot=self._Hotstar['Units']
-                    price_hot=self._Hotstar['Price_Unit']
+                    unit_hot=self.get_hot_unit()
+                    price_hot=self.get_hot_price()
                     self.amount+=(self.input_dict[i]// unit_hot)* price_hot
                 else:
                     return sres
