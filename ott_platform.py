@@ -91,7 +91,7 @@ def main_func():
     print("1-Netflix")
     print("2:-Amazon")
     print("3:- Hotstar")
-    total_plat=int(input("Enter for how mant you want to activate your plan:"))
+    total_plat=3
     d={}
     for i in range(total_plat):
         ott_plat,view=input("Enter Ott platform and viewing hours:").split()
