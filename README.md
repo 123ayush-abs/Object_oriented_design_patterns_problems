@@ -1,4 +1,4 @@
-# Charoo-thoughtworks-cinema_seat
+
 '''Problem Statement:  In a movie theatre 2 shows are running. You are given available seat of both show. There are some groups who want to book the tickets so first ask the show no. and then check whether seats are available or not if available then book their seats else ask them to enter seats again.
 After each successful booking print total available seats and total booked seats.
 Show 1:
